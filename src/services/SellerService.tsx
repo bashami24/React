@@ -1,5 +1,5 @@
 
-import { Seller } from '../models/Seller';
+
 
 const apiBaseURL = "http://localhost:9017/";
 

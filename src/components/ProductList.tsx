@@ -5,8 +5,7 @@ import { getAllProductsAPI, deleteProductAPI, addProductAPI } from '../services/
 const ProductList: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [showMenuId, setShowMenuId] = useState<number | null>(null);
-    const [newProduct, setNewProduct] = useState<{ id: number; name: string; price: number; seller: number }>({
-        id: 0,
+    const [newProduct, setNewProduct] = useState<{  name: string; price: number; seller: number }>({
         name: '',
         price: 0,
         seller: 0
@@ -31,8 +30,8 @@ const ProductList: React.FC = () => {
     };
 
     const handleAddProduct = async () => {
-        await addProductAPI(newProduct.id, newProduct.name, newProduct.price, newProduct.seller);
-        setNewProduct({ id: 0, name: '', price: 0, seller: 0 });
+        await addProductAPI( newProduct.name, newProduct.price, newProduct.seller);
+        setNewProduct({ name: '', price: 0, seller: 0 });
         getAllProductsAPI().then(response=> response.json()).then(data => setProducts(data));
     };
 
@@ -55,11 +54,7 @@ const ProductList: React.FC = () => {
             </ul>
             <h2>Add Product</h2>
             <form onSubmit={(e) => { e.preventDefault(); handleAddProduct(); }}>
-                <label>
-                    id:
-                    <input type="number" name="id" value={newProduct.id||''} onChange={handleChange} />
-                </label>
-                <label>
+                <label> 
                     Name:
                     <input type="text" name="name" value={newProduct.name} onChange={handleChange} />
                 </label>

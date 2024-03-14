@@ -4,17 +4,19 @@ import { Product } from '../models/Product';
 import { getAllProductsAPI, addProductAPI, deleteProductAPI, updateProductAPI } from '../services/ProductService';
 
 const ProductPage: React.FC = () => {
+    const[newName, setNewName] = useState<string>('');
+    const[newPrice, setNewPrice] = useState<number>();
+    const[newSeller, setNewSeller] = useState<number>();
     const [products, setProducts] = useState<Product[]>([]);
     const [showMenuId, setShowMenuId] = useState<number | null>(null);
-    const [newProduct, setNewProduct] = useState<{ id:number;name: string; price: number; seller: number }>({
-        id: 0,
+    const [newProduct, setNewProduct] = useState<{ name: string; price: number; seller: number }>({
         name: '',
         price: 0,
         seller: 0
     });
 
     useEffect(() => {
-        getAllProductsAPI().then(response=> response.json()).then(data => setProducts(data));
+        getAllProductsAPI().then(response => response.json()).then(data => setProducts(data));
     }, []);
 
     const toggleMenu = (productId: number) => {
@@ -23,22 +25,34 @@ const ProductPage: React.FC = () => {
 
     const handleDeleteProduct = (productId: number) => {
         deleteProductAPI(productId).then(() => {
-            getAllProductsAPI().then(response=> response.json()).then(data => setProducts(data));
+            getAllProductsAPI().then(response => response.json()).then(data => setProducts(data));
             setShowMenuId(null);
         });
     };
-
+    /*const handleUpdateProduct = (id: number, newName: string, newPrice: number, newSeller: number) => {
+        updateProductAPI(id, newName, newPrice, newSeller).then(() => {
+            setProducts(products.map(product => (product.id === id ? { ...product, name: newName, price: newPrice, seller: newSeller } : product)));
+            setShowMenuId(null);
+        });
+    };*/
     const handleUpdateProduct = (id: number, newName: string, newPrice: number, newSeller: number) => {
         updateProductAPI(id, newName, newPrice, newSeller).then(() => {
-            getAllProductsAPI().then(response=> response.json()).then(data => setProducts(data));
+            const updatedProducts = products.map(product => {
+                if (product.id === id) {
+                    return { ...product, name: newName, price: newPrice, seller: newSeller };
+                }
+                return product;
+            });
+            setProducts(updatedProducts);
             setShowMenuId(null);
         });
     };
 
+
     const handleAddProduct = async () => {
-        await addProductAPI(newProduct.id, newProduct.name,newProduct.price, newProduct.seller);
-        setNewProduct({ id:0,name: '', price: 0, seller: 0 });
-        getAllProductsAPI().then(response=> response.json()).then(data => setProducts(data));
+        await addProductAPI(newProduct.name, newProduct.price, newProduct.seller);
+        setNewProduct({ name: '', price: 0, seller: 0 });
+        getAllProductsAPI().then(response => response.json()).then(data => setProducts(data));
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +70,11 @@ const ProductPage: React.FC = () => {
                         <button onClick={() => toggleMenu(product.id)}>Toggle Menu</button>
                         {showMenuId === product.id && (
                             <div>
-                                <button onClick={() => handleUpdateProduct(product.id, 'New Name', 0, 0)}>Update</button>
+                            <input type="text" placeholder="New Name" onChange={(e) => setNewName(e.target.value)} />
+                            <input type="number" placeholder="New Price" onChange={(e) => setNewPrice(parseInt(e.target.value) || 0)} />
+                            <input type="number" placeholder="New Seller ID" onChange={(e) => setNewSeller(parseInt(e.target.value) || 0)} />
+                            <input type="number" name="id" value={product.id}onChange={handleChange} />
+                                <button onClick={() => handleUpdateProduct(product.id,newName,newPrice||0,newSeller||0)}>Update</button>
                                 <button onClick={() => handleDeleteProduct(product.id)}>Delete</button>
                             </div>
                         )}
@@ -65,10 +83,6 @@ const ProductPage: React.FC = () => {
             </ul>
             <h2>Add Product</h2>
             <form onSubmit={(e) => { e.preventDefault(); handleAddProduct(); }}>
-            <label>
-                    id:
-                    <input type="number" name="id" value={newProduct.id} onChange={handleChange} />
-                </label>
                 <label>
                     Name:
                     <input type="text" name="name" value={newProduct.name} onChange={handleChange} />

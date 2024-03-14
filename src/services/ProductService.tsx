@@ -7,12 +7,12 @@ export function getAllProductsAPI() {
     });
 }
 
-export function addProductAPI(id: number, Name: string, price: number, sellerId: number) {
+export function addProductAPI( Name: string, price: number, seller: number) {
     return fetch(apiBaseURL + "product", {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: id, name: Name, price, sellerId })
+        body: JSON.stringify({ name: Name, price, seller })
     });
 }
 
@@ -23,14 +23,14 @@ export function deleteProductAPI(id: number){
     });
 }
 
-export const updateProductAPI = async (newid: number, newName: string, newPrice: number, newSellerId: number): Promise<void> => {
+export const updateProductAPI = async (id: number, newName: string, newPrice: number, Seller: number): Promise<void> => {
     try {
-        await fetch(`${apiBaseURL}/products/${newid}`, {
+        await fetch(`${apiBaseURL}/products/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id: newid, name: newName, price: newPrice, sellerId: newSellerId })
+            body: JSON.stringify({ id: id, name: newName, price: newPrice, sellerId: Seller})
         });
     } catch (error) {
         console.error('Error updating product:', error);
