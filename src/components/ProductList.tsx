@@ -6,9 +6,7 @@ const ProductList: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [showMenuId, setShowMenuId] = useState<number | null>(null);
     const [newProduct, setNewProduct] = useState<{  name: string; price: number; seller: number }>({
-        name: '',
-        price: 0,
-        seller: 0
+        name: '', price: 0,seller: 0
     });
 
     useEffect(() => {
