@@ -21,17 +21,15 @@ const App: React.FC = () => {
                 <NavigationBar toggleTheme={toggleTheme} />
                 <div className="sidebar">
                     <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/sellers">Sellers</a></li>
-                        <li><a href="/products">Products</a></li>
-                    </ul>
-                </div>
-                <Routes>
+                    <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/sellers" element={<SellerPage />} />
                     <Route path="/products" element={<ProductPage />} />
                     <Route path="*" element={<PageNotFoundPage />} />
                 </Routes>
+                    </ul>
+                </div>
+
             </div>
         </Router>
     );
