@@ -36,6 +36,10 @@ const ProductPage: React.FC = () => {
         });
     };*/
     const handleUpdateProduct = (id: number, newName: string, newPrice: number, newSeller: number) => {
+        if(!newName || newPrice === 0 || newSeller === 0){ 
+           
+            return;
+        }
         updateProductAPI(id, newName, newPrice, newSeller).then(() => {
             const updatedProducts = products.map(product => {
                 if (product.id === id) {
@@ -67,7 +71,7 @@ const ProductPage: React.FC = () => {
                 {products.map((product) => (
                     <li key={product.id}>
                         {product.name} - {product.price} - {product.seller}
-                        <button onClick={() => toggleMenu(product.id)}>Toggle Menu</button>
+                        <button onClick={() => toggleMenu(product.id)}>Please Click here to choose</button>
                         {showMenuId === product.id && (
                             <div>
                             <input type="text" placeholder="New Name" onChange={(e) => setNewName(e.target.value)} />
@@ -75,6 +79,8 @@ const ProductPage: React.FC = () => {
                             <input type="number" placeholder="New Seller ID" onChange={(e) => setNewSeller(parseInt(e.target.value) || 0)} />
                             <input type="number" name="id" value={product.id}onChange={handleChange} />
                                 <button onClick={() => handleUpdateProduct(product.id,newName,newPrice||0,newSeller||0)}>Update</button>
+                                {(!newName || newPrice === 0 || newSeller === 0)&& 
+                                <p style={{color: 'red'}}>Cannot Update the product. Please enter valid value for Name, Price and Seller</p>}
                                 <button onClick={() => handleDeleteProduct(product.id)}>Delete</button>
                             </div>
                         )}
