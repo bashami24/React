@@ -14,6 +14,7 @@ const ProductPage: React.FC = () => {
         price: 0,
         seller: 0
     });
+    
 
     useEffect(() => {
         getAllProductsAPI().then(response => response.json()).then(data => setProducts(data));
@@ -23,11 +24,12 @@ const ProductPage: React.FC = () => {
         setShowMenuId((prevId) => (prevId === productId ? null : productId));
     };
 
-    const handleDeleteProduct = (productId: number) => {
+    const handleDeleteProduct = (productId: number) => { if (productId) {
         deleteProductAPI(productId).then(() => {
             getAllProductsAPI().then(response => response.json()).then(data => setProducts(data));
             setShowMenuId(null);
         });
+    }
     };
     /*const handleUpdateProduct = (id: number, newName: string, newPrice: number, newSeller: number) => {
         updateProductAPI(id, newName, newPrice, newSeller).then(() => {

@@ -23,14 +23,14 @@ export function deleteProductAPI(id: number){
     });
 }
 
-export const updateProductAPI = async (id: number, newName: string, newPrice: number, Seller: number): Promise<void> => {
+export const updateProductAPI = async (id: number, newName: string, newPrice: number, NewSeller: number): Promise<void> => {
     try {
-        await fetch(apiBaseURL +`product/${id}`, {
+        await fetch(apiBaseURL + `product/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id: id, name: newName, price: newPrice, sellerId: Seller})
+            body: JSON.stringify({ id: id, name: newName, price: newPrice, sellerId: NewSeller})
         });
     } catch (error) {
         console.error('Error updating product:', error);
