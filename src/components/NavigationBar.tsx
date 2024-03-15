@@ -12,7 +12,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({toggleTheme}) => {
                 <li><Link to="/sellers">Sellers</Link></li>
                 <li><Link to="/products">Products</Link></li>
             </ul>
-            <button onClick={toggleTheme}>Toggle Theme</button>
+<button onClick={toggleTheme}>Toggle Theme</button>
         </nav>
     );
 };
