@@ -35,7 +35,7 @@ const ProductList: React.FC = () => {
 
     return (
         <div>
-            <h2>All Products</h2>
+            <h2>Product</h2>
             <ul>
                 {products.map((product) => (
                     <li key={product.id}>

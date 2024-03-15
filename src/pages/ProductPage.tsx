@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Product } from '../models/Product';
 import { getAllProductsAPI, addProductAPI, deleteProductAPI, updateProductAPI } from '../services/ProductService';
@@ -69,6 +68,7 @@ const ProductPage: React.FC = () => {
     return (
         <div>
             <h1>Products</h1>
+            <h2 style={{fontStyle: 'italic'}}>Product List</h2>
             <ul>
                 {products.map((product) => (
                     <li key={product.id}>

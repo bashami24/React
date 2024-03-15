@@ -8,7 +8,7 @@ interface SellerListProps {
 const SellerList: React.FC<SellerListProps> = ({ sellers }) => {
     return (
         <div>
-            <h2>All Sellers</h2>
+            <h2 style= {{fontStyle: 'italic'}}>Seller List</h2>
             <ul>
                 {sellers.map((seller) => (
                     <li key={seller.id}>{seller.name}</li>
