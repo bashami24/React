@@ -1,4 +1,4 @@
-const apiBaseURL = "http://localhost:9017/";
+const apiBaseURL = "http://localhost:9005/";
 
 export function getAllProductsAPI() {
     return fetch(apiBaseURL + "product", {
@@ -7,8 +7,8 @@ export function getAllProductsAPI() {
     });
 }
 
-export function addProductAPI( Name: string, price: number, seller: number) {
-    return fetch(apiBaseURL + "product", {
+export function addProductAPI(Name: string, price: number, seller: number) {
+    return fetch(apiBaseURL + `seller/${seller}/product`, {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "application/json" },

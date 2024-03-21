@@ -1,7 +1,7 @@
 
 
 
-const apiBaseURL = "http://localhost:9017/";
+const apiBaseURL = "http://localhost:9005/";
 
 export function getAllSellersAPI() {
     return fetch(apiBaseURL + "seller", {
@@ -10,11 +10,11 @@ export function getAllSellersAPI() {
     });
 }
 
-export function addSellerAPI(name: string, id: number) {
+export function addSellerAPI( id: number , seller: string,) {
     return fetch(apiBaseURL + "seller", {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, id })
+        body: JSON.stringify({ id, seller })
     });
 }

@@ -11,7 +11,7 @@ const ProductPage: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [sellers, setSellers] = useState<Seller[]>([]);
     const [showMenuId, setShowMenuId] = useState<number | null>(null);
-    const [newProduct, setNewProduct] = useState<{ name: string; price: number; seller: number }>({
+    const [newProduct, setNewProduct] = useState<{ name: string; price: number; seller: number}>({
         name: '',
         price: 0,
         seller: 0
@@ -60,7 +60,7 @@ const ProductPage: React.FC = () => {
     };
     const handleAddProduct = async () => {
         await addProductAPI(newProduct.name, newProduct.price, newProduct.seller);
-        setNewProduct({ name: '', price: 0, seller: 0 });
+        setNewProduct({ name: '', price: 0, seller: 0});
         getAllProductsAPI().then(response => response.json()).then(data => setProducts(data));
     };
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
