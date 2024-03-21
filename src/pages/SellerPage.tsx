@@ -46,10 +46,6 @@ const SellerPage: React.FC = () => {
                         onChange={(e) => setNewSellerName(e.target.value)}/>
                         <button onClick={handleAddSeller}>Add Seller</button>
                     
-                    onChange={(e) => setNewSellerId(parseInt(e.target.value))}
-
-                    />
-                    <button onClick={handleAddSeller}>Add Seller</button>
                 </div>
             ) : (
                 <button onClick={() => setShowAddSellerForm(true)}>Add New Seller</button>
