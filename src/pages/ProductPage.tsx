@@ -70,6 +70,7 @@ const ProductPage: React.FC = () => {
     return (
         <div>
             <h1>Products</h1>
+            <img src="https://cdn.pixabay.com/photo/2016/11/18/12/08/white-male-1834125_1280.jpg" style={{width: '250px', height: 'auto', }}/>
             <h2 style={{fontStyle: 'italic'}}>Product List</h2>
             <ul>
                 {products.map((product) => (
@@ -113,6 +114,7 @@ const ProductPage: React.FC = () => {
                 </label>
                 <button type="submit">Add Product</button>
             </form>
+           
         </div>
     );
 };

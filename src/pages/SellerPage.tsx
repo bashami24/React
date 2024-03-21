@@ -29,6 +29,7 @@ const SellerPage: React.FC = () => {
     return (
         <div>
             <h1>Sellers</h1>
+            <img src= "https://cdn.pixabay.com/photo/2017/08/07/19/46/shop-2607121_1280.jpg" style={{width: '350px', height: 'auto', margin: '10px'}}/>
             <SellerList sellers={sellers} />
             {showAddSellerForm ? (
                 <div>
@@ -45,10 +46,18 @@ const SellerPage: React.FC = () => {
                         onChange={(e) => setNewSellerName(e.target.value)}/>
                         <button onClick={handleAddSeller}>Add Seller</button>
                     
+                    onChange={(e) => setNewSellerId(parseInt(e.target.value))}
+
+                    />
+                    <button onClick={handleAddSeller}>Add Seller</button>
                 </div>
             ) : (
                 <button onClick={() => setShowAddSellerForm(true)}>Add New Seller</button>
             )}
+
+            
+
+            
         </div>
     );
 };
